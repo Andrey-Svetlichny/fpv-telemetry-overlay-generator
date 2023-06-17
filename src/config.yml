@@ -1,0 +1,26 @@
+log:
+  file: C:\Projects\FPV\Logs\2023-06-10.csv
+  shift: "66"
+video:
+  - C:\Video\2023-06-10\GX010876.MP4: 707.2
+  - C:\Video\2023-06-10\GX020876.MP4: 56.24
+eval:
+  - x.sats = x["Tmp2(@C)"] % 100
+  - x.alt = Math.round(x["Alt(m)"])
+  - x.spd = Math.round(1.852*x["GSpd(kts)"])
+  - x.curr = Math.round(x["Curr(A)"])
+  - x.batt = Math.round(10*x["VFAS(V)"])/10
+  - 'x.mode = x.SG < 0 ? "acro" : x.SG == 0 ? "angle" : "angle+"'
+show:
+  a1:
+    - sats: 📡 %s
+    - RSSI(dB):  %s
+    - "0420":  %s
+    - mode: "%s"
+  a2:
+    - alt: "%s m"
+    - spd: "%s ㎞/h"
+  a3:
+    - curr: 🔋%s A
+    - batt: "%d V"
+    - Fuel(%): "%s mAh"

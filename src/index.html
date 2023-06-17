@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <link rel="stylesheet" href="./content/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>FPV telemetry overlay generator</title>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <div class="mb-3">
+        <label for="logFile" class="form-label">Log file</label>
+        <div id="logFile"></div>
+        <button id="btnLogFile" class="btn btn-outline-secondary mt-2" type="button">Choose file</button>
+      </div>
+
+      <div class="mb-3">
+        <label for="videoFiles" class="form-label">Video files</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Path</th>
+              <th scope="col">Length, sec</th>
+            </tr>
+          </thead>
+          <tbody id="videoFiles"></tbody>
+        </table>
+        <button id="btnVideoFiles" class="btn btn-outline-secondary" type="button">Choose files</button>
+      </div>
+
+      <div class="mb-3">
+        <label for="shift" class="form-label">Shift, seconds</label>
+        <input id="shift" type="text" class="form-control" placeholder="Log shift, seconds" aria-label="Log file" />
+      </div>
+
+      <button id="btnGenerate" class="btn btn-primary" type="button">Generate telemetry</button>
+      <button id="btnEditConfig" class="btn btn-link" type="button">Edit config</button>
+
+      <div id="error"></div>
+      <div id="message"></div>
+    </div>
+  </body>
+  <script src="./content/bootstrap/js/bootstrap.min.js"></script>
+  <script src="./renderer.js"></script>
+</html>
