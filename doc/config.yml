@@ -1,0 +1,26 @@
+log:
+  file: C:\Projects\FPV\Logs\2023-06-10.csv
+  shift: 66 # time shift, seconds
+video: # path: length, seconds
+  - C:\Video\2023-06-10\GX010876.MP4: 707.2
+  - C:\Video\2023-06-10\GX020876.MP4: 56.24
+eval: # evaluate on every log row
+  - x.sats = x["Tmp2(@C)"] % 100 # satellites count
+  - x.alt = Math.round(x["Alt(m)"]) # altitude
+  - x.spd = Math.round(1.852*x["GSpd(kts)"]) # speed, convert knots to km/h
+  - x.curr = Math.round(x["Curr(A)"]) # current
+  - x.batt = Math.round(10*x["VFAS(V)"])/10 # battery voltage
+  - 'x.mode = x.SG < 0 ? "acro" : x.SG == 0 ? "angle" : "angle+"'
+show:
+  a1: # left-top
+    - sats: 📡 %s
+    - RSSI(dB):  %s
+    - '0420':  %s
+    - mode: '%s'
+  a2: # left-center
+    - alt: '%s m'
+    - spd: '%s ㎞/h'
+  a3: # left-bottom
+    - curr: 🔋%s A
+    - batt: '%d V'
+    - Fuel(%): '%s mAh'
